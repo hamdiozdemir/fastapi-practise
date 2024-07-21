@@ -4,6 +4,7 @@ from schemas import UserBase, UserDisplay
 from sqlalchemy.orm.session import Session
 from db.database import get_db
 from db import db_user
+from auth.oauth2 import get_current_user
 
 router = APIRouter(
     prefix='/user',
@@ -19,7 +20,7 @@ def create_user(request: UserBase, db: Session = Depends(get_db)):
 
 # list users
 @router.get('/', response_model=list[UserDisplay])
-def get_all_users(db: Session = Depends(get_db)):
+def get_all_users(db: Session = Depends(get_db), current_user: UserBase = Depends(get_current_user)):
         # Handle exceptions
     return db_user.get_all_users(db)
 
