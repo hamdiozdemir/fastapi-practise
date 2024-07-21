@@ -27,12 +27,18 @@ def retrieve_user(db: Session, id: int):
 
 
 def update_user(db: Session, id: int, request: UserBase):
-    user = db.query(DbUser).filter(DbUser.id == id).first()
+    user = db.query(DbUser).filter(DbUser.id == id)
     user.update({
         DbUser.username: request.username,
         DbUser.email: request.email,
         DbUser.password: Hash.bcrypt(request.password)
     })
     db.commit()
-    return {'status': 'success'}
+    return db.query(DbUser).filter(DbUser.id==id).first()
 
+
+def delete_user(db: Session, id: int):
+    user = db.query(DbUser).filter(DbUser.id == id).first()
+    db.delete(user)
+    db.commit()
+    return {'status': 'success'}
