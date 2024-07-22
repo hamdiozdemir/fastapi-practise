@@ -89,8 +89,7 @@ def create_body_with_required(blog: BlogModel,
 def create_body_with_required(blog: BlogModel,
                               id: int,
                               content: str = Body(...,
-                                                  min_length=10,
-                                                  regex='^[a-z/s]*$')): # max_length de olur
+                                                  min_length=10)): # max_length de olur
     return {
         'data': blog,
         'id': id,

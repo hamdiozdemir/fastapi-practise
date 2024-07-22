@@ -5,7 +5,6 @@ from db.hash import Hash
 from fastapi import HTTPException, status
 
 def create_user(request: UserBase, db: Session):
-    print(request)
     new_user = DbUser(
         username = request.username,
         email = request.email,

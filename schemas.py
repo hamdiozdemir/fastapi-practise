@@ -1,5 +1,5 @@
 from typing import List
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 # Article inside UserDisplay
@@ -9,8 +9,10 @@ class Article(BaseModel):
     content: str
     published: bool
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
+
+    # class Config:
+    #     from_attributes = True
 
 
 class UserBase(BaseModel):
@@ -24,9 +26,11 @@ class UserDisplay(BaseModel):
     email: str
     items: List[Article] = []
 
-    class Config:
-        #orm_mode = True
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
+
+    # class Config:
+    #     #orm_mode = True
+    #     from_attributes = True
 
 
 # User inside ArticleDisplay
@@ -34,8 +38,10 @@ class User(BaseModel):
     id: int
     username: str
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
+
+    # class Config:
+    #     from_attributes = True
 
 
 class ArticleBase(BaseModel):
@@ -52,5 +58,7 @@ class ArticleDisplay(BaseModel):
     published: bool
     user: User
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
+
+    # class Config:
+    #     from_attributes = True
